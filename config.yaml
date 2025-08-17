@@ -21,7 +21,7 @@ proxy-groups:
   - name: "PROXY"
     type: select
     proxies:
-      - "withu-proxy"
+      - "自建：vmess+tcp+tls"
       - DIRECT
 
 # 规则（Rules）
@@ -43,4 +43,5 @@ dns:
   enhanced-mode: fake-ip
   nameserver:
     - 8.8.8.8
+
     - 1.1.1.1
