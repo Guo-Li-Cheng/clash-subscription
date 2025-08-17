@@ -1,0 +1,46 @@
+# ================
+# Clash 配置文件
+# ================
+
+# 代理节点（Proxies）
+proxies:
+  - name: "自建：vmess+tcp+tls"           # 可自定义名称
+    type: vmess
+    server: withu.cloud           # 替换为你的域名或IP
+    port: 443                     # 端口
+    uuid: 6950466e-f17d-4b3f-bade-15a2d1b12892   # 替换为你的 UUID
+    alterId: 0
+    cipher: auto
+    tls: true                     # 启用 TLS
+    servername: withu.cloud       # SNI，必须和 server 一致
+    skip-cert-verify: false       # 不跳过证书验证（推荐 false）
+    network: tcp                  # 使用 TCP 传输
+
+# 代理组（Proxy Groups）
+proxy-groups:
+  - name: "PROXY"
+    type: select
+    proxies:
+      - "withu-proxy"
+      - DIRECT
+
+# 规则（Rules）
+rules:
+  - DOMAIN-SUFFIX,google.com,DIRECT
+  - DOMAIN-SUFFIX,youtube.com,DIRECT
+  - DOMAIN-KEYWORD,ad,DIRECT
+  - GEOIP,cn,DIRECT
+  - MATCH,PROXY
+
+# 全局设置
+allow-lan: false
+mode: Rule
+log-level: info
+external-controller: 127.0.0.1:9090
+dns:
+  enable: true
+  listen: 127.0.0.1:53
+  enhanced-mode: fake-ip
+  nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
